@@ -4,5 +4,10 @@
     <string name="app_name">MissionCompleting</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="AddBtn">Add</string>
+    <string name="StartTime">StartTime :</string>
+    <string name="LastTime">LastTime :</string>
+    <string name="Delay">DELAY</string>
+    <string name="Score">Score :</string>
 
 </resources>
