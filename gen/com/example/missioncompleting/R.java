@@ -47,7 +47,8 @@ public final class R {
     public static final class layout {
         public static final int activity_mission_list=0x7f030000;
         public static final int adddetail=0x7f030001;
-        public static final int mission_list_item=0x7f030002;
+        public static final int addetails_title=0x7f030002;
+        public static final int mission_list_item=0x7f030003;
     }
     public static final class menu {
         public static final int mission_list=0x7f070000;
