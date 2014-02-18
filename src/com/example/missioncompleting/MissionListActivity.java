@@ -2,7 +2,9 @@ package com.example.missioncompleting;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,7 +18,6 @@ public class MissionListActivity extends Activity {
 	private ListView listView = null;
 	private List<String> list = new ArrayList<String>();
 	private MissionListAdapter adapter = null;
-	private int resourcesId ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,13 +26,14 @@ public class MissionListActivity extends Activity {
 		Button btn = (Button)findViewById(R.id.add_btn);
 		listView = (ListView)findViewById(R.id.mission_list);
 		listView.setAdapter(adapter);
-		//setData();
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
-				setData();
-				adapter.notifyDataSetChanged();
+				Intent toadd = new Intent(MissionListActivity.this,AddDetailActivity.class);
+				toadd.putExtra("M_A", "MaintoAdd");
+				startActivity(toadd);
+				//toadd.
 			}});
 		
 		

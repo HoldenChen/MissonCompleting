@@ -9,5 +9,15 @@
     <string name="LastTime">LastTime :</string>
     <string name="Delay">DELAY</string>
     <string name="Score">Score :</string>
+    <string name="default_startTime">00:00</string>
+    <string name="default_lastTime">0000mins</string>
+    <string name="AddDetails">AddDetails</string>
+    <string name="AddMissionHint">Input your Mission Here</string>
+    <string name="SettingStartTime">Setting your start time</string>
+    <string name="Ring">Ring(Y/N)</string>
+    <string name="Mins">Mins</string>
+    <string name="Thirty">30</string>
+    <string name="choosecolortv">Please Choose Your Mission Color</string>
+
 
 </resources>

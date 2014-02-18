@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.missioncompleting.AddDetailActivity"
+            android:label="@string/AddDetails" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
