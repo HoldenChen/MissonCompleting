@@ -12,10 +12,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+         >
         <activity
-            android:name="com.example.missioncompleting.MissionListActivity"
-            android:label="@string/app_name" >
+            android:name="com.holden.missioncompleting.MissionListActivity"
+            android:label="@string/app_name" 
+            
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,11 +26,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.missioncompleting.AddDetailActivity"
-            android:label="@string/AddDetails" >
+            android:name="com.holden.missioncompleting.AddDetailActivity"
+            android:label="@string/AddDetails"
+            
+			>
             <intent-filter>
             </intent-filter>
         </activity>
+        
+        <receiver android:name=".AlarmReceiver" android:process=":remote"/>   
+				
+		 
     </application>
 
 </manifest>

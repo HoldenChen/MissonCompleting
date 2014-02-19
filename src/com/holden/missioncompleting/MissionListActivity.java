@@ -1,4 +1,4 @@
-package com.example.missioncompleting;
+package com.holden.missioncompleting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.util.MissionListAdapter;
+import com.example.missioncompleting.R;
+import com.holden.missioncompleting.util.MissionListAdapter;
 
 public class MissionListActivity extends Activity {
 	private ListView listView = null;

@@ -29,9 +29,9 @@
         android:text="@string/SettingStartTime"
         />
 
-    <Spinner
-        android:id="@+id/Settimespinner"
-        android:layout_width="56dip"
+    <Button
+        android:id="@+id/Settimebtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:layout_gravity="center"
         />
@@ -99,6 +99,7 @@
             android:layout_height="60dip"
             android:orientation="horizontal"
             android:layout_gravity="center">
+        
             <RadioButton 
                 android:layout_width="60dip"
             android:layout_height="wrap_content"
