@@ -34,7 +34,16 @@
             </intent-filter>
         </activity>
         
-        <receiver android:name=".AlarmReceiver" android:process=":remote"/>   
+        <activity
+            android:name="com.holden.missioncompleting.ShowAlarmActivity"
+            android:label="@string/showAlarm"
+            
+			>
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+        <receiver android:name="com.holden.missioncompleting.util.AlarmReceiver" android:process=":remote"/>   
 				
 		 
     </application>

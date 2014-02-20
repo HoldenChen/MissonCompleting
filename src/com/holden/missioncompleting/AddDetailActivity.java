@@ -19,7 +19,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -28,27 +30,65 @@ import com.holden.missioncompleting.util.AlarmReceiver;
 
 @SuppressLint("NewApi")
 public class AddDetailActivity extends Activity {
-	private EditText missionDescription = null;
+	private EditText missionDescriptionet = null;
 	private Button timePickBtn = null;
-	private CheckBox isRing = null;
+	private CheckBox isRingcb = null;
 	private EditText lastTimeet = null;
-	private RadioGroup chooseColor = null;
+	private EditText scoReet = null;
+	private RadioGroup chooseColorrg = null;
 	private String mission = null;
+	private String scoreStr ;
+	private String lastTimeStr;
 	private Calendar c;
 	private int hour;
 	private int minute;
+	private RadioButton redRb;
+	private RadioButton yellowRb;
+	private RadioButton greenRb;
+	private RadioButton pinkblueRb;
+	private String startTime;
+	String setColor = null;
 	Context context = AddDetailActivity.this;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.adddetail);			
-		missionDescription = (EditText)findViewById(R.id.addMissionet);
+		missionDescriptionet = (EditText)findViewById(R.id.addMissionet);
 		timePickBtn = (Button)findViewById(R.id.Settimebtn);
-		isRing = (CheckBox)findViewById(R.id.clockRing);
+		isRingcb = (CheckBox)findViewById(R.id.clockRing);
 		lastTimeet = (EditText)findViewById(R.id.lasttimeEt);
-		chooseColor = (RadioGroup)findViewById(R.id.choosecolorRg);
-		mission = missionDescription.getText().toString();
+		scoReet = (EditText)findViewById(R.id.missionScore);
+		chooseColorrg = (RadioGroup)findViewById(R.id.choosecolorRg);
+		redRb = (RadioButton)findViewById(R.id.redrb);
+		yellowRb = (RadioButton)findViewById(R.id.yellowrb);
+		greenRb = (RadioButton)findViewById(R.id.greenrb);
+		pinkblueRb = (RadioButton)findViewById(R.id.pinkbluerb);
+	   final int redID =redRb.getId(),yellowID=yellowRb.getId(),greenID=greenRb.getId(),pinkBlueID=pinkblueRb.getId();
+		
+		
+		
+		mission = missionDescriptionet.getText().toString();
 		c = Calendar.getInstance();
 		setCurrentTimeOnView();
+		chooseColorrg.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(RadioGroup rg, int item) {
+				// TODO Auto-generated method stub
+				if(item == redID){
+					setColor = "red";
+				}
+				if(item == yellowID){
+					setColor = "yellow";
+				}
+				if(item == greenID){
+					setColor = "green";
+				}
+				if(item == pinkBlueID){
+					setColor = "pinkblue";
+				}
+				System.out.println(setColor);
+				
+			}});
 		timePickBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -65,7 +105,7 @@ public class AddDetailActivity extends Activity {
 						hour = hourOfDay;
 						minute = ominute;
 						timePickBtn.setText(pad(hourOfDay)+":"+pad(ominute));
-						
+						startTime = pad(hourOfDay)+":"+pad(ominute);
 						//c.getTimeInMillis();
 						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
 						c.set(Calendar.MINUTE, minute);
@@ -114,6 +154,12 @@ public class AddDetailActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
+		mission = missionDescriptionet.getText().toString();
+		scoreStr = scoReet.getText().toString();
+		lastTimeStr = lastTimeet.getText().toString();
+		
+		
+		
 		if(item.getItemId()==android.R.id.home)
 		{
 			
@@ -122,17 +168,37 @@ public class AddDetailActivity extends Activity {
 		}
 		
 		if(item.getItemId()==R.id.add){
-			mission = missionDescription.getText().toString();
-			Toast.makeText(this, mission, Toast.LENGTH_LONG).show();
-			if(mission==null||mission.equals("")){
+			
+			if(checkStr(mission)){
 				Toast.makeText(this, "Mission Descrioption can't be empty", Toast.LENGTH_LONG).show();
 			}
-			if(isRing.isChecked()){
+			if(isRingcb.isChecked()){
 				AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 				Intent alarmintent = new Intent(AddDetailActivity.this,AlarmReceiver.class);
 				alarmintent.setAction("ALARM_ACTION");
 				PendingIntent alarmpendingIntent = PendingIntent.getBroadcast(AddDetailActivity.this, 0, alarmintent, 0);
 				am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), alarmpendingIntent);
+			}
+			if(checkStr(lastTimeStr)){
+				Toast.makeText(this, "Planed time can't be empty", Toast.LENGTH_LONG).show();
+			}
+			if(checkStr(scoreStr)){
+				Toast.makeText(this, "Mission's score can't be empty", Toast.LENGTH_LONG).show();
+			}
+			else{
+				MissionListActivity.isBackFromAdd=true;
+				Intent addTomainIntent = new Intent(AddDetailActivity.this,MissionListActivity.class);
+				Bundle sendDataToMain = new Bundle();
+				sendDataToMain.putString("mission", mission);
+				sendDataToMain.putString("startTime", startTime);
+				sendDataToMain.putString("lastTimeStr", lastTimeStr);
+				sendDataToMain.putString("scoreStr", scoreStr);
+				sendDataToMain.putString("setColor", setColor);
+				//String details[] = {mission,startTime,lastTimeStr,scoreStr,setColor};
+				
+				addTomainIntent.putExtras(sendDataToMain);
+				startActivity(addTomainIntent);
+				
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -143,6 +209,15 @@ public class AddDetailActivity extends Activity {
 			return String.valueOf(c);
 		else
 			return "0" + String.valueOf(c);
+	}
+	
+	public boolean checkStr(String str){
+		if(str==null||str.equals("")){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 }

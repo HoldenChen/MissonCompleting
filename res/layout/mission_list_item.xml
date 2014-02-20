@@ -33,7 +33,7 @@
             	 android:text="@string/StartTime"
                 />
             <TextView
-                 android:id="@+id/starttime"
+                 android:id="@+id/starttimetvlist"
                  android:layout_width = "wrap_content" 
             	 android:layout_height = "wrap_content"
             	 android:text="@string/default_startTime"
@@ -45,7 +45,7 @@
             	 android:text="@string/LastTime"
                 />
             <TextView
-                 android:id="@+id/lasttime"
+                 android:id="@+id/lasttimetvlist"
                  android:layout_width = "wrap_content" 
             	 android:layout_height = "wrap_content"
             	 android:text="@string/default_lastTime"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text ="@string/Score"   />
         <TextView 
-            android:id="@+id/score"
+            android:id="@+id/scoretvlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />     

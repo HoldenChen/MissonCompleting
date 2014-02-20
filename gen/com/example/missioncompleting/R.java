@@ -30,27 +30,34 @@ public final class R {
     }
     public static final class id {
         public static final int Settimebtn=0x7f080003;
-        public static final int action_settings=0x7f08000f;
-        public static final int add=0x7f08000e;
+        public static final int action_settings=0x7f080015;
+        public static final int add=0x7f080014;
         public static final int addMissionet=0x7f080002;
         public static final int add_btn=0x7f080001;
-        public static final int adddetailtitleback=0x7f080007;
-        public static final int choosecolorRg=0x7f080006;
+        public static final int adddetailtitleback=0x7f08000c;
+        public static final int choosecolorRg=0x7f080007;
         public static final int clockRing=0x7f080004;
-        public static final int delayBtn=0x7f08000c;
-        public static final int itemcolor=0x7f080008;
-        public static final int lasttime=0x7f08000b;
+        public static final int delayBtn=0x7f080011;
+        public static final int greenrb=0x7f08000a;
+        public static final int itemcolor=0x7f08000d;
         public static final int lasttimeEt=0x7f080005;
+        public static final int lasttimetvlist=0x7f080010;
+        public static final int missionScore=0x7f080006;
         public static final int mission_list=0x7f080000;
-        public static final int missiondecription=0x7f080009;
-        public static final int score=0x7f08000d;
-        public static final int starttime=0x7f08000a;
+        public static final int missiondecription=0x7f08000e;
+        public static final int pinkbluerb=0x7f08000b;
+        public static final int redrb=0x7f080008;
+        public static final int scoretvlist=0x7f080012;
+        public static final int starttimetvlist=0x7f08000f;
+        public static final int stopalarm=0x7f080013;
+        public static final int yellowrb=0x7f080009;
     }
     public static final class layout {
         public static final int activity_mission_list=0x7f030000;
         public static final int adddetail=0x7f030001;
         public static final int addetails_title=0x7f030002;
         public static final int mission_list_item=0x7f030003;
+        public static final int showalarm=0x7f030004;
     }
     public static final class menu {
         public static final int adddetailmenu=0x7f070000;
@@ -67,13 +74,16 @@ public final class R {
         public static final int Score=0x7f050007;
         public static final int SettingStartTime=0x7f05000c;
         public static final int StartTime=0x7f050004;
+        public static final int StopAlarm=0x7f050012;
         public static final int Thirty=0x7f05000f;
+        public static final int Three=0x7f050013;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int choosecolortv=0x7f050010;
         public static final int default_lastTime=0x7f050009;
         public static final int default_startTime=0x7f050008;
         public static final int hello_world=0x7f050002;
+        public static final int showAlarm=0x7f050011;
     }
     public static final class style {
         /** 
