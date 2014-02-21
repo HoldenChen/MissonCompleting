@@ -27,9 +27,13 @@ import android.widget.Toast;
 
 import com.example.missioncompleting.R;
 import com.holden.missioncompleting.util.AlarmReceiver;
+import com.holden.missioncompleting.util.DBManager;
+import com.holden.missioncompleting.util.MissionDetails;
 
 @SuppressLint("NewApi")
 public class AddDetailActivity extends Activity {
+	private DBManager mgr;
+	
 	private EditText missionDescriptionet = null;
 	private Button timePickBtn = null;
 	private CheckBox isRingcb = null;
@@ -47,7 +51,7 @@ public class AddDetailActivity extends Activity {
 	private RadioButton greenRb;
 	private RadioButton pinkblueRb;
 	private String startTime;
-	String setColor = null;
+	String setColor = "";
 	Context context = AddDetailActivity.this;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -62,8 +66,8 @@ public class AddDetailActivity extends Activity {
 		yellowRb = (RadioButton)findViewById(R.id.yellowrb);
 		greenRb = (RadioButton)findViewById(R.id.greenrb);
 		pinkblueRb = (RadioButton)findViewById(R.id.pinkbluerb);
-	   final int redID =redRb.getId(),yellowID=yellowRb.getId(),greenID=greenRb.getId(),pinkBlueID=pinkblueRb.getId();
-		
+	    final int redID =redRb.getId(),yellowID=yellowRb.getId(),greenID=greenRb.getId(),pinkBlueID=pinkblueRb.getId();
+		mgr = new DBManager(this);
 		
 		
 		mission = missionDescriptionet.getText().toString();
@@ -76,15 +80,19 @@ public class AddDetailActivity extends Activity {
 				// TODO Auto-generated method stub
 				if(item == redID){
 					setColor = "red";
+					System.out.println("you click red");
 				}
 				if(item == yellowID){
 					setColor = "yellow";
+					System.out.println("you click yellow");
 				}
 				if(item == greenID){
 					setColor = "green";
+					System.out.println("you click green");
 				}
 				if(item == pinkBlueID){
 					setColor = "pinkblue";
+					System.out.println("you click pinkBlue");
 				}
 				System.out.println(setColor);
 				
@@ -121,21 +129,19 @@ public class AddDetailActivity extends Activity {
 		
 	}
 	
-	public void setCurrentTimeOnView() {
-
-		
-
-		
+	public void onDestory(){
+		super.onDestroy();
+		mgr.closeDB();
+	}
+	
+	public void setCurrentTimeOnView() {	
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
-
 		// set current time into textview
+		startTime = pad(hour)+":"+pad(minute);
 		timePickBtn.setText(new StringBuilder().append(pad(hour)).append(":")
-				.append(pad(minute)));
-
+				.append(pad(minute)));		
 		// set current time into timepicker
-		
-
 	}
 	
 	
@@ -186,17 +192,15 @@ public class AddDetailActivity extends Activity {
 				Toast.makeText(this, "Mission's score can't be empty", Toast.LENGTH_LONG).show();
 			}
 			else{
-				MissionListActivity.isBackFromAdd=true;
+				MissionDetails md = new MissionDetails();
+				md.mission = mission;
+				md.starttime = startTime;
+				md.lasttime = lastTimeStr;
+				md.score = scoreStr;
+				md.color = setColor;
+				System.out.println(setColor);
+				mgr.add(md);
 				Intent addTomainIntent = new Intent(AddDetailActivity.this,MissionListActivity.class);
-				Bundle sendDataToMain = new Bundle();
-				sendDataToMain.putString("mission", mission);
-				sendDataToMain.putString("startTime", startTime);
-				sendDataToMain.putString("lastTimeStr", lastTimeStr);
-				sendDataToMain.putString("scoreStr", scoreStr);
-				sendDataToMain.putString("setColor", setColor);
-				//String details[] = {mission,startTime,lastTimeStr,scoreStr,setColor};
-				
-				addTomainIntent.putExtras(sendDataToMain);
 				startActivity(addTomainIntent);
 				
 			}

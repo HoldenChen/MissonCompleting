@@ -3,7 +3,6 @@ package com.holden.missioncompleting;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,21 +14,33 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.missioncompleting.R;
+import com.holden.missioncompleting.util.DBManager;
+import com.holden.missioncompleting.util.MissionDetails;
 import com.holden.missioncompleting.util.MissionListAdapter;
 
 public class MissionListActivity extends Activity {
-	private ListView listView = null;
+	//= null;
 	private ArrayList<HashMap<String, Object>> listItem =new ArrayList<HashMap<String,Object>>();;
 	private MissionListAdapter adapter = null;
-	static boolean isBackFromAdd = false;
+	DBManager mgr ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission_list);	
+		mgr = new DBManager(this);
 		adapter = new MissionListAdapter(this,listItem);
 		Button btn = (Button)findViewById(R.id.add_btn);
-		listView = (ListView)findViewById(R.id.mission_list);
+		ListView listView = (ListView)findViewById(R.id.mission_list);
 		listView.setAdapter(adapter);
+		List<MissionDetails> getdataFromDB= new ArrayList<MissionDetails>() ;
+		getdataFromDB = mgr.query();
+		
+		if(!getdataFromDB.isEmpty()){
+			setData(getdataFromDB);
+			adapter.notifyDataSetChanged();
+		}
+		
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -37,8 +48,10 @@ public class MissionListActivity extends Activity {
 				Intent toadd = new Intent(MissionListActivity.this,AddDetailActivity.class);
 				toadd.putExtra("M_A", "MaintoAdd");
 				startActivity(toadd);
-				//toadd.
+				mgr.closeDB();
 			}});
+		
+		
 		
 		
 		
@@ -46,67 +59,45 @@ public class MissionListActivity extends Activity {
 	
 	public void onStart(){
 		super.onStart();
-		if(isBackFromAdd){
-			Intent receiveDetailIntent = getIntent();
-			Bundle receiveDetailBundle = receiveDetailIntent.getExtras();
-			String setMissionlv =receiveDetailBundle.getString("mission");
-			String setStartTimelv = receiveDetailBundle.getString("startTime");
-			String setLastTimelv = receiveDetailBundle.getString("lastTimeStr");
-			String setScorelv = receiveDetailBundle.getString("scoreStr");
-			String setColorlv = receiveDetailBundle.getString("setColor");
-			if(setMissionlv==null){
-				setMissionlv = "";
-			}
-			if(setStartTimelv==null){
-				setStartTimelv = "";
-			}
-			if(setLastTimelv==null){
-				setLastTimelv = "";
-			}
-			if(setScorelv==null){
-				setScorelv = "";
-			}
-			if(setColorlv==null){
-				setColorlv = "";
-			}
-			
-			setData(setMissionlv,setStartTimelv,setLastTimelv,setScorelv,setColorlv);
-			adapter.notifyDataSetChanged();
-		}
-		isBackFromAdd = false;
 		
 	}
-	public void setData(String mission,String startTime,String lastTime,String score,String color){
-		 HashMap<String,Object> map = new HashMap<String,Object>();
-		 map.put("mission", mission);
-		 map.put("startTime", startTime);
-		 map.put("lastTime", lastTime);
-		 map.put("score", score);
-		 int resourceId=0;
-		 if(color.equals("red")){
-			 resourceId = R.drawable.red;
-		 }
-		 if(color.equals("yellow")){
-			 resourceId = R.drawable.yellow;
-		 }
-		 if(color.equals("pinkblue")){
-			 resourceId = R.drawable.pinkblue;
-		 }
-		 if(color.equals("green")){
-			 resourceId = R.drawable.green;
-		 }
-		 map.put("image", resourceId);
-		 listItem.add(map);
-		 
-			//list.add(map);
-			
+	public void setData(List <MissionDetails> mdlist){
+		for(MissionDetails md : mdlist){
+			 HashMap<String,Object> map = new HashMap<String,Object>();
+			 map.put("mission", md.mission);
+			 map.put("startTime", md.starttime);
+			 map.put("lastTime", md.lasttime);
+			 map.put("score", md.score);
+			 int resourceId=0;
+			 if(md.color.equals("red")){
+				 resourceId = R.drawable.red;
+			 }
+			 if(md.color.equals("yellow")){
+				 resourceId = R.drawable.yellow;
+			 }
+			 if(md.color.equals("pinkblue")){
+				 resourceId = R.drawable.pinkblue;
+			 }
+			 if(md.color.equals("green")){
+				 resourceId = R.drawable.green;
+			 }
+			 map.put("image", resourceId);
+			 listItem.add(map);
+		}			
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mission_list, menu);
+		getMenuInflater().inflate(R.menu.show_mission_actionbar, menu);
 		return true;
+	}
+	
+	protected void onDestory(){
+		super.onDestroy();
+		System.out.println("MissionListActivity is destory now");
+		mgr.closeDB();
+		
 	}
 
 }

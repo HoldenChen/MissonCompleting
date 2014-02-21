@@ -1,7 +1,9 @@
 package com.holden.missioncompleting.util;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -62,15 +64,50 @@ public class MissionListAdapter extends BaseAdapter {
 		}else{
 			holder = (ViewHolder)convertView.getTag();
 		}
-		holder.mission.setText(listItem.get(position).get("mission").toString());
-		holder.startTime.setText(listItem.get(position).get("startTime").toString());
-		holder.lastTime.setText(listItem.get(position).get("lastTime").toString());
-		holder.score.setText(listItem.get(position).get("score").toString());
-		holder.image.setBackgroundResource(Integer.parseInt(listItem.get(position).get("image").toString()));
+		Object startTimeOb =listItem.get(position).get("startTime");
+		if(startTimeOb==null){
+			startTimeOb = "";
+		}
+		String missionstr =listItem.get(position).get("mission").toString();
+		String startTimestr = startTimeOb.toString();
+		String lastTimestr =listItem.get(position).get("lastTime").toString();
+		String scorestr =listItem.get(position).get("score").toString();
+		String imagestr =listItem.get(position).get("image").toString();
+		
+		if(missionstr==null){missionstr = "";}
+		if(startTimestr==null){startTimestr = "";}
+		if(lastTimestr==null){lastTimestr = "";}
+		if(scorestr==null){scorestr = "";}
+		if(imagestr==null){imagestr = "";}
+		
+		
+//		ArrayList<String> alist = new ArrayList<String>();
+//		alist.add(missionstr);
+//		alist.add(startTimestr);
+//		alist.add(lastTimestr);
+//		alist.add(scorestr);
+//		alist.add(imagestr);
+//		ArrayList<String> blist = ifStringnull(alist);
+		
+		holder.mission.setText(missionstr);
+		holder.startTime.setText(startTimestr);
+		holder.lastTime.setText(lastTimestr);
+		holder.score.setText(scorestr);
+		holder.image.setBackgroundResource(Integer.parseInt(imagestr));
 		
 
 		
 		return convertView;
+		
+	}
+	
+	public ArrayList<String> ifStringnull(ArrayList<String> list){
+		for(String str :list){
+			if(str == null){
+				str ="";
+			}
+		}
+		return list;
 		
 	}
 	

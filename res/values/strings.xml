@@ -21,6 +21,7 @@
     <string name="showAlarm">Alarm</string>
     <string name="StopAlarm">StopAlarm</string>
     <string name="Three">3</string>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>

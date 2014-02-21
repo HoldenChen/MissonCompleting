@@ -16,16 +16,15 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 	public static final String LASTTIME = "lasttime";
 	public static final String SCORE = "score";
 	public static final String COLOR = "color";
-	public MySQLiteOpenHelper(Context context, String DATABASE_NAME,
-			CursorFactory factory, int VERSION) {
-		super(context, DATABASE_NAME, factory, VERSION);
+	public MySQLiteOpenHelper(Context context) {
+		super(context, DATABASE_NAME,null,VERSION);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		String strSql = "CREATE TABLE IF NOT EXISTS  "+ TABLE_NAME + "( id INTEGER PRIMARY KEY AUTOINCREMENT ,mission TEXT,starttime VARCHAR,lasttime VARCHAR,score VARCHAR,color VARCHAR)";
+		String strSql = "CREATE TABLE IF NOT EXISTS  "+ TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT ,mission TEXT,starttime VARCHAR,lasttime VARCHAR,score VARCHAR,color VARCHAR)";
 		db.execSQL(strSql);
 	}
 
