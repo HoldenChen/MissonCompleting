@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal" >
+    
     <ImageView 
-        android:id = "@+id/itemcolor"
-        android:layout_width = "match_parent"
+        android:id = "@+id/itemcolore"
+        android:layout_width = "20dip"
         android:layout_height = "100dip"
-        android:layout_weight= "20"
         android:contentDescription="@string/app_name"
         />
     <LinearLayout 
-         android:layout_width = "match_parent"
+         android:layout_width = "300dip"
          android:layout_height = "wrap_content"
          android:layout_gravity="center"
-         android:layout_weight = "1"
-         android:orientation = "vertical">
+         android:orientation = "vertical"
+         android:background="@color/red"
+         >
          
         <TextView
-            android:id = "@+id/missiondecription"
+            android:id = "@+id/missiondecriptione"
             android:layout_width="match_parent"
             android:layout_height = "wrap_content"
             android:textSize="20sp"
@@ -34,7 +35,7 @@
             	 android:text="@string/StartTime"
                 />
             <TextView
-                 android:id="@+id/starttimetvlist"
+                 android:id="@+id/starttimetvliste"
                  android:layout_width = "wrap_content" 
             	 android:layout_height = "wrap_content"
             	 android:text="@string/default_startTime"
@@ -46,7 +47,7 @@
             	 android:text="@string/LastTime"
                 />
             <TextView
-                 android:id="@+id/lasttimetvlist"
+                 android:id="@+id/lasttimetvliste"
                  android:layout_width = "wrap_content" 
             	 android:layout_height = "wrap_content"
             	 android:text="@string/default_lastTime"
@@ -57,23 +58,30 @@
     	android:layout_height="match_parent"
     	android:orientation="horizontal"
 	    >
-        <Button
-            android:id="@+id/delayBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="1dip"
-            android:text="@string/Delay" />
+        
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text ="@string/Score"   />
         <TextView 
-            android:id="@+id/scoretvlist"
+            android:id="@+id/scoretvliste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />     
     </LinearLayout> 
-    </LinearLayout>    
-	
+    </LinearLayout> 
+    
+   
+        <CheckBox
+        android:id="@+id/mddelete_CB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"  
+        />
+        
+    
+    
+    
+
 </LinearLayout>

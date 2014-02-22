@@ -34,6 +34,15 @@
             </intent-filter>
         </activity>
         
+         <activity
+            android:name="com.holden.missioncompleting.EditMissionDetailsActivity"
+            android:label="@string/EditDetails"
+            
+			>
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
         <activity
             android:name="com.holden.missioncompleting.ShowAlarmActivity"
             android:label="@string/showAlarm"

@@ -22,6 +22,9 @@
     <string name="StopAlarm">StopAlarm</string>
     <string name="Three">3</string>
     <color name="white">#FFFFFF</color>
+    <string name="EditDetails">EditDetails</string>
+    <color name="red">#CC0000</color>
+    <color name="blue">#3366CC</color>
 
 
 </resources>

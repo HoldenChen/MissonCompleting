@@ -1,5 +1,6 @@
 package com.holden.missioncompleting.util;
 
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,5 +10,6 @@ public final class ViewHolder {
 	public TextView lastTime;
 	public TextView score;
 	public ImageView image;
+	public CheckBox checkbox;
 
 }

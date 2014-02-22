@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,6 +65,7 @@ public class MissionListActivity extends Activity {
 	public void setData(List <MissionDetails> mdlist){
 		for(MissionDetails md : mdlist){
 			 HashMap<String,Object> map = new HashMap<String,Object>();
+			 map.put("md-ID", md._id);
 			 map.put("mission", md.mission);
 			 map.put("startTime", md.starttime);
 			 map.put("lastTime", md.lasttime);
@@ -91,6 +93,17 @@ public class MissionListActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.show_mission_actionbar, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		if(item.getItemId()==R.id.deleteActionbarMS){
+			Intent deleteMDetailsIntent = new Intent(MissionListActivity.this,EditMissionDetailsActivity.class);
+			startActivity(deleteMDetailsIntent);
+		}
+		
+		return super.onOptionsItemSelected(item);
+		
 	}
 	
 	protected void onDestory(){
