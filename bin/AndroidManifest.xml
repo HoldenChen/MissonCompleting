@@ -35,6 +35,7 @@
         </activity>
         
          <activity
+              android:allowBackup="true"
             android:name="com.holden.missioncompleting.EditMissionDetailsActivity"
             android:label="@string/EditDetails"
             

@@ -74,7 +74,10 @@
     
    
         <CheckBox
+        android:clickable="false"
+        android:focusable="false"
         android:id="@+id/mddelete_CB"
+        android:focusableInTouchMode="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"  

@@ -39,9 +39,13 @@ public class DBManager {
 			
 		}
 		
-		public void deleteOldMisisonDetails(MissionDetails md){
+		public void deleteOldMisisonDetails(String[] itemID){
+			for(int i =0 ;i <itemID.length;i++){
+				db.delete("missiondetails", "_id =  ?", new String[]{itemID[i]});
+				
+			}
 			
-			db.delete("missiondetails", "starttime < ?", new String[] {md.starttime});
+			
 		}
 		
 		public List<MissionDetails> query(){

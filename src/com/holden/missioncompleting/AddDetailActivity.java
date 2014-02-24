@@ -51,7 +51,7 @@ public class AddDetailActivity extends Activity {
 	private RadioButton greenRb;
 	private RadioButton pinkblueRb;
 	private String startTime;
-	String setColor = "";
+	String setColor = "red";
 	Context context = AddDetailActivity.this;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -102,9 +102,6 @@ public class AddDetailActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				// TODO Auto-generated method stub
-				//c.setTimeInMillis(System.currentTimeMillis());      
-//		           int hour = c.get(Calendar.HOUR_OF_DAY);             
-//		           int minute = c.get(Calendar.MINUTE);
 		           new TimePickerDialog(context, new OnTimeSetListener(){
 
 					@Override

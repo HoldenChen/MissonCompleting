@@ -18,19 +18,38 @@ import android.widget.TextView;
 
 public class EditMisisonDetailAdapter extends BaseAdapter {
 
-
-	int mResourcesId ;
+	private static HashMap<Integer,Boolean> isSelected;
+	static int mResourcesId ;
 	private LayoutInflater mInfalter;
 	ArrayList<HashMap<String, Object>> listItem;
 	ViewHolder holder;
-	boolean checkflag;
+	Context context;
+	HashMap<Integer,Boolean> checkboxlist;
 	
 	public EditMisisonDetailAdapter(Context context,ArrayList<HashMap<String, Object>> item) {
 		this.mInfalter = LayoutInflater.from(context);
+		this.context = context;
 		listItem = item;
+        isSelected = new HashMap<Integer, Boolean>();
+        initCheckboxlist();
+        System.out.println("listem's size"+listItem.size());
 		// TODO Auto-generated constructor stub
 	}
 	
+	 public static HashMap<Integer,Boolean> getIsSelected() {
+	        return isSelected;
+	    }
+	public void initCheckboxlist(){
+		for(int i=0 ; i < listItem.size(); i++){
+			isSelected.put(i, false);
+		}
+	}
+	
+
+
+	    public static void setIsSelected(HashMap<Integer,Boolean> isSelected) {
+	    		EditMisisonDetailAdapter.isSelected = isSelected;
+	    }
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -49,6 +68,10 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 	public void setResourceId(int i){
 		
 		mResourcesId = i;
+	}
+	
+	public void setCheckboxState(HashMap<Integer,Boolean> isSelected){
+		EditMisisonDetailAdapter.isSelected = isSelected;
 	}
 	@Override
 	public View getView(int position,View convertView,ViewGroup parent){
@@ -88,10 +111,8 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		holder.lastTime.setText(lastTimestr);
 		holder.score.setText(scorestr);
 		holder.image.setBackgroundResource(Integer.parseInt(imagestr));
-		holder.checkbox.setOnCheckedChangeListener(new LvCheckedChangeListener(position));
-		
-
-		
+		System.out.println("isSelect is null or not "+isSelected.isEmpty());
+		holder.checkbox.setChecked(isSelected.get(position));	
 		return convertView;
 		
 	}
@@ -107,11 +128,18 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 			
 			// TODO Auto-generated method stub
 			int vid = btn.getId();
-			if(vid == holder.checkbox.getId()){
+			int checkBoxId = holder.checkbox.getId();
+			if(vid == checkBoxId){
 				holder.checkbox.setChecked(checkflag);
+				System.out.println("this is the "+position+"item's checkbox values:"+checkflag+"   checkbox's id : "+checkBoxId+"   btn's id "+vid   );
+				if(holder.checkbox.isChecked()){
+					
+				}
+				
 			}
 			
-			System.out.println("this is the "+position+"item's checkbox values:"+checkflag);
+			//deleteCheckedItem(position);
+			//System.out.println("this is the "+position+"item's checkbox values:"+checkflag);
 			
 		}
     }
@@ -126,11 +154,14 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		
 	}
 	
-	public void deleteCheckedItem(int position){
-		listItem.get(position).get("md_ID");
-		EditMissionDetailsActivity eda = new EditMissionDetailsActivity();
-		//DBManager mgr = new DBManager(eda.context);
-		listItem.remove(position);
+	public  void deleteItem(String[] itemId){
+		
+		DBManager mgr = new DBManager(context);
+		mgr.deleteOldMisisonDetails(itemId);
+		//listItem.remove(position);
 	}
+	
+
+	
 
 }

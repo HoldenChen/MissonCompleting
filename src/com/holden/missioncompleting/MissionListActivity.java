@@ -24,23 +24,18 @@ public class MissionListActivity extends Activity {
 	private ArrayList<HashMap<String, Object>> listItem =new ArrayList<HashMap<String,Object>>();;
 	private MissionListAdapter adapter = null;
 	DBManager mgr ;
+	ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission_list);	
-		mgr = new DBManager(this);
-		adapter = new MissionListAdapter(this,listItem);
-		Button btn = (Button)findViewById(R.id.add_btn);
-		ListView listView = (ListView)findViewById(R.id.mission_list);
-		listView.setAdapter(adapter);
-		List<MissionDetails> getdataFromDB= new ArrayList<MissionDetails>() ;
-		getdataFromDB = mgr.query();
 		
-		if(!getdataFromDB.isEmpty()){
-			setData(getdataFromDB);
-			adapter.notifyDataSetChanged();
-		}
+		
+		Button btn = (Button)findViewById(R.id.add_btn);
+		 listView = (ListView)findViewById(R.id.mission_list);
+		
+		
 		
 		btn.setOnClickListener(new OnClickListener(){
 
@@ -49,7 +44,7 @@ public class MissionListActivity extends Activity {
 				Intent toadd = new Intent(MissionListActivity.this,AddDetailActivity.class);
 				toadd.putExtra("M_A", "MaintoAdd");
 				startActivity(toadd);
-				mgr.closeDB();
+				
 			}});
 		
 		
@@ -60,12 +55,25 @@ public class MissionListActivity extends Activity {
 	
 	public void onStart(){
 		super.onStart();
+		mgr = new DBManager(this);
+		List<MissionDetails> getdataFromDB= new ArrayList<MissionDetails>() ;
+		getdataFromDB = mgr.query();
 		
+		if(!getdataFromDB.isEmpty()){
+			setData(getdataFromDB);
+			adapter = new MissionListAdapter(this,listItem);
+			listView.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+			mgr.closeDB();
+		}
 	}
+	
+	//public void 
 	public void setData(List <MissionDetails> mdlist){
+		listItem.clear();
 		for(MissionDetails md : mdlist){
 			 HashMap<String,Object> map = new HashMap<String,Object>();
-			 map.put("md-ID", md._id);
+			
 			 map.put("mission", md.mission);
 			 map.put("startTime", md.starttime);
 			 map.put("lastTime", md.lasttime);
@@ -109,7 +117,7 @@ public class MissionListActivity extends Activity {
 	protected void onDestory(){
 		super.onDestroy();
 		System.out.println("MissionListActivity is destory now");
-		mgr.closeDB();
+		//mgr.closeDB();
 		
 	}
 
