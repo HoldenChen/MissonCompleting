@@ -7,17 +7,20 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.missioncompleting.R;
 import com.holden.missioncompleting.util.DBManager;
 import com.holden.missioncompleting.util.MissionDetails;
 import com.holden.missioncompleting.util.MissionListAdapter;
+import com.holden.missioncompleting.util.MyAppalication;
 
 public class MissionListActivity extends Activity {
 	//= null;
@@ -29,6 +32,7 @@ public class MissionListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		 MyAppalication.getInstance().addActivity(MissionListActivity.this);
 		setContentView(R.layout.activity_mission_list);	
 		
 		
@@ -46,11 +50,6 @@ public class MissionListActivity extends Activity {
 				startActivity(toadd);
 				
 			}});
-		
-		
-		
-		
-		
 	}
 	
 	public void onStart(){
@@ -95,6 +94,22 @@ public class MissionListActivity extends Activity {
 			 listItem.add(map);
 		}			
 	}
+	
+	private long exitTime = 0;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	        	 MyAppalication.getInstance().exit();
+	        }
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,6 +123,7 @@ public class MissionListActivity extends Activity {
 		if(item.getItemId()==R.id.deleteActionbarMS){
 			Intent deleteMDetailsIntent = new Intent(MissionListActivity.this,EditMissionDetailsActivity.class);
 			startActivity(deleteMDetailsIntent);
+			
 		}
 		
 		return super.onOptionsItemSelected(item);

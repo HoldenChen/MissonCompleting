@@ -13,12 +13,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.example.missioncompleting.R;
+import com.holden.missioncompleting.util.MyAppalication;
 
 public class ShowAlarmActivity extends Activity{
 	private Button stopBtn = null;
 	AlarmThread mythread = new AlarmThread(this);
 	public void onCreate(Bundle saveInstancestate){
 		super.onCreate(saveInstancestate);
+		 MyAppalication.getInstance().addActivity(ShowAlarmActivity.this);
 		setContentView(R.layout.showalarm);
 		stopBtn = (Button)findViewById(R.id.stopalarm);
 		stopBtn.setOnClickListener(new OnClickListener(){

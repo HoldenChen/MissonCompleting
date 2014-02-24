@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import com.example.missioncompleting.R;
 import com.holden.missioncompleting.util.DBManager;
 import com.holden.missioncompleting.util.EditMisisonDetailAdapter;
 import com.holden.missioncompleting.util.MissionDetails;
+import com.holden.missioncompleting.util.MyAppalication;
 import com.holden.missioncompleting.util.ViewHolder;
 
 public class EditMissionDetailsActivity extends Activity {
@@ -33,6 +35,7 @@ public class EditMissionDetailsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		 MyAppalication.getInstance().addActivity(EditMissionDetailsActivity.this);
 		setContentView(R.layout.editmiddiondetails);
 		mgr = new DBManager(this);
 		Button selectall = (Button)findViewById(R.id.selectAll);
@@ -112,6 +115,8 @@ public class EditMissionDetailsActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item){
 		
 		if(item.getItemId() == android.R.id.home){
+			Intent backTomissionlist = new Intent(EditMissionDetailsActivity.this,MissionListActivity.class);
+			startActivity(backTomissionlist);
 			finish();
 			return true;
 		}
@@ -131,7 +136,6 @@ public class EditMissionDetailsActivity extends Activity {
 			unSelectAll();
 			adapter.deleteItem(deidList);
 		}
-		
 		return super.onOptionsItemSelected(item);
 	}
 	

@@ -29,6 +29,7 @@ import com.example.missioncompleting.R;
 import com.holden.missioncompleting.util.AlarmReceiver;
 import com.holden.missioncompleting.util.DBManager;
 import com.holden.missioncompleting.util.MissionDetails;
+import com.holden.missioncompleting.util.MyAppalication;
 
 @SuppressLint("NewApi")
 public class AddDetailActivity extends Activity {
@@ -54,7 +55,8 @@ public class AddDetailActivity extends Activity {
 	String setColor = "red";
 	Context context = AddDetailActivity.this;
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);	
+		 MyAppalication.getInstance().addActivity(AddDetailActivity.this);
 		setContentView(R.layout.adddetail);			
 		missionDescriptionet = (EditText)findViewById(R.id.addMissionet);
 		timePickBtn = (Button)findViewById(R.id.Settimebtn);
@@ -199,7 +201,7 @@ public class AddDetailActivity extends Activity {
 				mgr.add(md);
 				Intent addTomainIntent = new Intent(AddDetailActivity.this,MissionListActivity.class);
 				startActivity(addTomainIntent);
-				
+				finish();
 			}
 		}
 		return super.onOptionsItemSelected(item);
