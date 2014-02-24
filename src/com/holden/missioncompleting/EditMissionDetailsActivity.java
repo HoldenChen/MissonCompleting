@@ -25,7 +25,7 @@ import com.holden.missioncompleting.util.ViewHolder;
 
 public class EditMissionDetailsActivity extends Activity {
 	private ArrayList<HashMap<String, Object>> listItem =new ArrayList<HashMap<String,Object>>();;
-	private EditMisisonDetailAdapter adapter = null;
+	private EditMisisonDetailAdapter adapter;
 	ListView listView =null;
 	DBManager mgr ;
 	List<MissionDetails> getdataFromDB;
@@ -34,24 +34,18 @@ public class EditMissionDetailsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editmiddiondetails);
-		
 		mgr = new DBManager(this);
-			Button selectall = (Button)findViewById(R.id.selectAll);
-			Button deSelectall = (Button)findViewById(R.id.deSelectAll);
-		 listView = (ListView)findViewById(R.id.editMdLv);
-		
-		// getdataFromDB= new ArrayList<MissionDetails>() ;
+		Button selectall = (Button)findViewById(R.id.selectAll);
+		Button deSelectall = (Button)findViewById(R.id.deSelectAll);
+		listView = (ListView)findViewById(R.id.editMdLv);
 		getdataFromDB = mgr.query();
-		
 		if(!getdataFromDB.isEmpty()){
 			setData(getdataFromDB);
 			adapter = new EditMisisonDetailAdapter(this,listItem);
 			listView.setAdapter(adapter);
-			adapter.notifyDataSetChanged();
 		}
 		
 		listView.setOnItemClickListener(new OnItemClickListener(){
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -63,7 +57,6 @@ public class EditMissionDetailsActivity extends Activity {
 			}});
 		
 		selectall.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -71,8 +64,6 @@ public class EditMissionDetailsActivity extends Activity {
 					EditMisisonDetailAdapter.getIsSelected().put(i,true);
 				}
 				adapter.notifyDataSetChanged();
-				
-				
 			}});
 		
 		deSelectall.setOnClickListener(new OnClickListener(){
@@ -80,24 +71,8 @@ public class EditMissionDetailsActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				for(int i =0; i<listItem.size();i++){
-					if(EditMisisonDetailAdapter.getIsSelected().get(i)){
-						EditMisisonDetailAdapter.getIsSelected().put(i,false);
-					}else{
-						EditMisisonDetailAdapter.getIsSelected().put(i,true);
-					}
-					
-				}
-				
-				adapter.notifyDataSetChanged();
-				
+				deSelectAll();
 			}});
-		
-		
-		
-		
-		
-		
 	}
 	
 	
@@ -135,43 +110,56 @@ public class EditMissionDetailsActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
+		
 		if(item.getItemId() == android.R.id.home){
 			finish();
 			return true;
 		}
 		if(item.getItemId() == R.id.delete_editmd_menu){
-			
-			for(int i = 0; i <listItem.size() ;i++){
-				int j = 0;
-				String [] deid  = new String[listItem.size()];
-				//isSe[i] = EditMisisonDetailAdapter.getIsSelected().get(i);
-				int deletePosition []=new int[listItem.size()];
+			List<String> deidList = new ArrayList<String>();
+			List<Integer> depoList =new ArrayList<Integer>();
+			int listItemSize = listItem.size();
+			for(int i =listItemSize-1 ;i >=0;i--){
 				if(EditMisisonDetailAdapter.getIsSelected().get(i)){
-					deid[j] = listItem.get(i).get("md_ID").toString();
-					deletePosition[j] = i;
-					j++;
-					
-					//String id = listItem.get(i).get("md_ID").toString();		
+						
+					deidList.add(listItem.get(i).get("md_ID").toString());
+					depoList.add(i);
+					listItem.remove(i);
+					adapter.notifyDataSetChanged();
 				}
-				for(int m = 0; m <j ;m++){
-					listItem.remove(m);
-				}
-				adapter.deleteItem(deid);
-				adapter.notifyDataSetChanged();
 			}
-			
-			
+			unSelectAll();
+			adapter.deleteItem(deidList);
 		}
 		
 		return super.onOptionsItemSelected(item);
 	}
 	
 	public void onStart(){
-		
 		super.onStart();
 		ActionBar actionBar = this.getActionBar(); 
         actionBar.setDisplayHomeAsUpEnabled(true); 
 	}
 	
+	public void deSelectAll(){
+		for(int i =0; i<listItem.size();i++){
+			if(EditMisisonDetailAdapter.getIsSelected().get(i)){
+				EditMisisonDetailAdapter.getIsSelected().put(i,false);
+			}else{
+				EditMisisonDetailAdapter.getIsSelected().put(i,true);
+			}
+		}
+		
+		adapter.notifyDataSetChanged();
+	}
+	
+	public void unSelectAll(){
+		for(int i =0; i<listItem.size(); i++){
+			if(EditMisisonDetailAdapter.getIsSelected().get(i)){
+				EditMisisonDetailAdapter.getIsSelected().put(i,false);
+			}
+		}
+		
+	}
 	 
 }

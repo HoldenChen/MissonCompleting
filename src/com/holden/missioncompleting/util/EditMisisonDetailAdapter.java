@@ -2,6 +2,8 @@ package com.holden.missioncompleting.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import com.example.missioncompleting.R;
 import com.holden.missioncompleting.EditMissionDetailsActivity;
 
@@ -111,38 +113,37 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		holder.lastTime.setText(lastTimestr);
 		holder.score.setText(scorestr);
 		holder.image.setBackgroundResource(Integer.parseInt(imagestr));
-		System.out.println("isSelect is null or not "+isSelected.isEmpty());
 		holder.checkbox.setChecked(isSelected.get(position));	
 		return convertView;
 		
 	}
 	
-	class LvCheckedChangeListener implements OnCheckedChangeListener {
-        private int position;
-		public LvCheckedChangeListener(int pos){
-			
-			position = pos;
-		}
-		@Override
-		public void onCheckedChanged(CompoundButton btn, boolean checkflag) {
-			
-			// TODO Auto-generated method stub
-			int vid = btn.getId();
-			int checkBoxId = holder.checkbox.getId();
-			if(vid == checkBoxId){
-				holder.checkbox.setChecked(checkflag);
-				System.out.println("this is the "+position+"item's checkbox values:"+checkflag+"   checkbox's id : "+checkBoxId+"   btn's id "+vid   );
-				if(holder.checkbox.isChecked()){
-					
-				}
-				
-			}
-			
-			//deleteCheckedItem(position);
-			//System.out.println("this is the "+position+"item's checkbox values:"+checkflag);
-			
-		}
-    }
+//	class LvCheckedChangeListener implements OnCheckedChangeListener {
+//        private int position;
+//		public LvCheckedChangeListener(int pos){
+//			
+//			position = pos;
+//		}
+//		@Override
+//		public void onCheckedChanged(CompoundButton btn, boolean checkflag) {
+//			
+//			// TODO Auto-generated method stub
+//			int vid = btn.getId();
+//			int checkBoxId = holder.checkbox.getId();
+//			if(vid == checkBoxId){
+//				holder.checkbox.setChecked(checkflag);
+//				System.out.println("this is the "+position+"item's checkbox values:"+checkflag+"   checkbox's id : "+checkBoxId+"   btn's id "+vid   );
+//				if(holder.checkbox.isChecked()){
+//					
+//				}
+//				
+//			}
+//			
+//			//deleteCheckedItem(position);
+//			//System.out.println("this is the "+position+"item's checkbox values:"+checkflag);
+//			
+//		}
+//    }
 	
 	public ArrayList<String> ifStringnull(ArrayList<String> list){
 		for(String str :list){
@@ -154,10 +155,10 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		
 	}
 	
-	public  void deleteItem(String[] itemId){
+	public  void deleteItem(List<String> deidList){
 		
 		DBManager mgr = new DBManager(context);
-		mgr.deleteOldMisisonDetails(itemId);
+		mgr.deleteOldMisisonDetails(deidList);
 		//listItem.remove(position);
 	}
 	
