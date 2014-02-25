@@ -34,7 +34,6 @@ import com.holden.missioncompleting.util.MyAppalication;
 @SuppressLint("NewApi")
 public class AddDetailActivity extends Activity {
 	private DBManager mgr;
-	
 	private EditText missionDescriptionet = null;
 	private Button timePickBtn = null;
 	private CheckBox isRingcb = null;
@@ -56,7 +55,7 @@ public class AddDetailActivity extends Activity {
 	Context context = AddDetailActivity.this;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		 MyAppalication.getInstance().addActivity(AddDetailActivity.this);
+		MyAppalication.getInstance().addActivity(AddDetailActivity.this);
 		setContentView(R.layout.adddetail);			
 		missionDescriptionet = (EditText)findViewById(R.id.addMissionet);
 		timePickBtn = (Button)findViewById(R.id.Settimebtn);
@@ -70,8 +69,6 @@ public class AddDetailActivity extends Activity {
 		pinkblueRb = (RadioButton)findViewById(R.id.pinkbluerb);
 	    final int redID =redRb.getId(),yellowID=yellowRb.getId(),greenID=greenRb.getId(),pinkBlueID=pinkblueRb.getId();
 		mgr = new DBManager(this);
-		
-		
 		mission = missionDescriptionet.getText().toString();
 		c = Calendar.getInstance();
 		setCurrentTimeOnView();
@@ -117,7 +114,7 @@ public class AddDetailActivity extends Activity {
 						c.set(Calendar.HOUR_OF_DAY, hourOfDay);
 						c.set(Calendar.MINUTE, minute);
 						c.set(Calendar.SECOND, 0);
-						c.set(Calendar.MILLISECOND, 0);
+						c.set(Calendar.MILLISECOND, 0); 
 						}	   		   
 					}, hour, minute, true).show();
 	    

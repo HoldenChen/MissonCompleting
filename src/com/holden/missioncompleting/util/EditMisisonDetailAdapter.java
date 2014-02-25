@@ -5,22 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.missioncompleting.R;
-import com.holden.missioncompleting.EditMissionDetailsActivity;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EditMisisonDetailAdapter extends BaseAdapter {
 
-	private static HashMap<Integer,Boolean> isSelected;
+	private static SparseBooleanArray isSelected;
 	static int mResourcesId ;
 	private LayoutInflater mInfalter;
 	ArrayList<HashMap<String, Object>> listItem;
@@ -32,13 +30,12 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		this.mInfalter = LayoutInflater.from(context);
 		this.context = context;
 		listItem = item;
-        isSelected = new HashMap<Integer, Boolean>();
+        isSelected = new SparseBooleanArray();
         initCheckboxlist();
         System.out.println("listem's size"+listItem.size());
-		// TODO Auto-generated constructor stub
 	}
 	
-	 public static HashMap<Integer,Boolean> getIsSelected() {
+	 public static SparseBooleanArray getIsSelected() {
 	        return isSelected;
 	    }
 	public void initCheckboxlist(){
@@ -49,7 +46,7 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 	
 
 
-	    public static void setIsSelected(HashMap<Integer,Boolean> isSelected) {
+	    public static void setIsSelected(SparseBooleanArray isSelected) {
 	    		EditMisisonDetailAdapter.isSelected = isSelected;
 	    }
 	@Override
@@ -72,7 +69,7 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		mResourcesId = i;
 	}
 	
-	public void setCheckboxState(HashMap<Integer,Boolean> isSelected){
+	public void setCheckboxState(SparseBooleanArray isSelected){
 		EditMisisonDetailAdapter.isSelected = isSelected;
 	}
 	@Override
@@ -118,33 +115,6 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		
 	}
 	
-//	class LvCheckedChangeListener implements OnCheckedChangeListener {
-//        private int position;
-//		public LvCheckedChangeListener(int pos){
-//			
-//			position = pos;
-//		}
-//		@Override
-//		public void onCheckedChanged(CompoundButton btn, boolean checkflag) {
-//			
-//			// TODO Auto-generated method stub
-//			int vid = btn.getId();
-//			int checkBoxId = holder.checkbox.getId();
-//			if(vid == checkBoxId){
-//				holder.checkbox.setChecked(checkflag);
-//				System.out.println("this is the "+position+"item's checkbox values:"+checkflag+"   checkbox's id : "+checkBoxId+"   btn's id "+vid   );
-//				if(holder.checkbox.isChecked()){
-//					
-//				}
-//				
-//			}
-//			
-//			//deleteCheckedItem(position);
-//			//System.out.println("this is the "+position+"item's checkbox values:"+checkflag);
-//			
-//		}
-//    }
-	
 	public ArrayList<String> ifStringnull(ArrayList<String> list){
 		for(String str :list){
 			if(str == null){
@@ -159,10 +129,5 @@ public class EditMisisonDetailAdapter extends BaseAdapter {
 		
 		DBManager mgr = new DBManager(context);
 		mgr.deleteOldMisisonDetails(deidList);
-		//listItem.remove(position);
 	}
-	
-
-	
-
 }

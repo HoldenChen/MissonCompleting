@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,20 +27,16 @@ import com.holden.missioncompleting.util.ViewHolder;
 public class EditMissionDetailsActivity extends Activity {
 	private ArrayList<HashMap<String, Object>> listItem =new ArrayList<HashMap<String,Object>>();;
 	private EditMisisonDetailAdapter adapter;
-	ListView listView =null;
-	DBManager mgr ;
-	List<MissionDetails> getdataFromDB;
-	Context context = EditMissionDetailsActivity.this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		 MyAppalication.getInstance().addActivity(EditMissionDetailsActivity.this);
+		MyAppalication.getInstance().addActivity(EditMissionDetailsActivity.this);
 		setContentView(R.layout.editmiddiondetails);
-		mgr = new DBManager(this);
+		DBManager mgr  = new DBManager(this);
 		Button selectall = (Button)findViewById(R.id.selectAll);
 		Button deSelectall = (Button)findViewById(R.id.deSelectAll);
-		listView = (ListView)findViewById(R.id.editMdLv);
-		getdataFromDB = mgr.query();
+		ListView listView = (ListView)findViewById(R.id.editMdLv);
+		List<MissionDetails>  getdataFromDB = mgr.query();
 		if(!getdataFromDB.isEmpty()){
 			setData(getdataFromDB);
 			adapter = new EditMisisonDetailAdapter(this,listItem);
@@ -52,8 +47,6 @@ public class EditMissionDetailsActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
-				System.out.println("you clicked me: "+ arg2);
 				ViewHolder holder = (ViewHolder) arg1.getTag();
 				holder.checkbox.toggle();
 				EditMisisonDetailAdapter.getIsSelected().put(arg2, holder.checkbox.isChecked());
@@ -62,7 +55,6 @@ public class EditMissionDetailsActivity extends Activity {
 		selectall.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				for(int i =0; i<listItem.size();i++){
 					EditMisisonDetailAdapter.getIsSelected().put(i,true);
 				}
@@ -73,7 +65,6 @@ public class EditMissionDetailsActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				deSelectAll();
 			}});
 	}
