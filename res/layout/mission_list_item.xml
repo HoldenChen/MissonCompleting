@@ -57,13 +57,6 @@
     	android:layout_height="match_parent"
     	android:orientation="horizontal"
 	    >
-        <Button
-            android:id="@+id/delayBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="1dip"
-            android:text="@string/Delay" />
-        
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -36,19 +36,18 @@ public final class R {
     }
     public static final class id {
         public static final int Settimebtn=0x7f090003;
-        public static final int action_settings=0x7f090022;
-        public static final int add=0x7f090020;
+        public static final int action_settings=0x7f090021;
+        public static final int add=0x7f09001f;
         public static final int addMissionet=0x7f090002;
         public static final int add_btn=0x7f090001;
         public static final int adddetailtitleback=0x7f09000c;
         public static final int choosecolorRg=0x7f090007;
         public static final int clockRing=0x7f090004;
         public static final int deSelectAll=0x7f090012;
-        public static final int delayBtn=0x7f09001d;
         public static final int delaytimenagtiveBtn=0x7f09000e;
         public static final int delaytimepositveBtn=0x7f09000f;
-        public static final int deleteActionbarMS=0x7f090023;
-        public static final int delete_editmd_menu=0x7f090021;
+        public static final int deleteActionbarMS=0x7f090022;
+        public static final int delete_editmd_menu=0x7f090020;
         public static final int editMdLv=0x7f090010;
         public static final int greenrb=0x7f09000a;
         public static final int inputdelaytimeET=0x7f09000d;
@@ -64,12 +63,12 @@ public final class R {
         public static final int missiondecriptione=0x7f090014;
         public static final int pinkbluerb=0x7f09000b;
         public static final int redrb=0x7f090008;
-        public static final int scoretvlist=0x7f09001e;
+        public static final int scoretvlist=0x7f09001d;
         public static final int scoretvliste=0x7f090017;
         public static final int selectAll=0x7f090011;
         public static final int starttimetvlist=0x7f09001b;
         public static final int starttimetvliste=0x7f090015;
-        public static final int stopalarm=0x7f09001f;
+        public static final int stopalarm=0x7f09001e;
         public static final int yellowrb=0x7f090009;
     }
     public static final class layout {
