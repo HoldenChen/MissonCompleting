@@ -159,9 +159,6 @@ public class AddDetailActivity extends Activity {
 		mission = missionDescriptionet.getText().toString();
 		scoreStr = scoReet.getText().toString();
 		lastTimeStr = lastTimeet.getText().toString();
-		
-		
-		
 		if(item.getItemId()==android.R.id.home)
 		{
 			

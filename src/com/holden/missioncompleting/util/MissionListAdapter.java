@@ -2,16 +2,13 @@ package com.holden.missioncompleting.util;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.missioncompleting.R;
 
 public class MissionListAdapter extends BaseAdapter {
